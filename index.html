@@ -8,13 +8,30 @@
   <!-- Βιβλιοθήκη CSS του Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
-  <!-- Το δικό μας αρχείο στυλ -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Το δικό μας αρχείο στυλ (με ?v=2 για να σπάσει η cache!) -->
+  <link rel="stylesheet" href="style.css?v=2">
+
+  <!-- ΑΚΑΡΙΑΙΟ FIX: Κλειδώνει το Textarea και την Αναδίπλωση Κειμένου -->
+  <style>
+    textarea, #description {
+      resize: none !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .summary-box, #confirmation-details, #confirmation-details p {
+      word-wrap: break-word !important;
+      overflow-wrap: anywhere !important;
+      word-break: break-all !important;
+      white-space: normal !important;
+      max-width: 100% !important;
+    }
+  </style>
 </head>
 <body>
 
   <!-- Κεντρικό Πλαίσιο Mobile Εφαρμογής -->
-  <div class="app-container">
+  <div class="app-container" style="overflow-x: hidden;">
 
     <!-- Κεφαλίδα (Header) -->
     <header class="app-header">
@@ -149,7 +166,7 @@
 
         <div class="form-group">
           <label for="description">Περιγραφή Προβλήματος / Αιτήματος *</label>
-          <textarea id="description" rows="4" placeholder="Περιγράψτε τη βλάβη ή την επιθυμητή εργασία συντήρησης..." required></textarea>
+          <textarea id="description" rows="4" style="resize: none; max-width: 100%; width: 100%;" placeholder="Περιγράψτε τη βλάβη ή την επιθυμητή εργασία συντήρησης..." required></textarea>
         </div>
 
         <div class="form-group">
@@ -180,7 +197,7 @@
       <div id="confirmation-box" class="card confirmation-card" style="display: none;">
         <h3>✔ Επιτυχής Υποβολή Αιτήματος!</h3>
         <p>Το αίτημά σας καταχωρήθηκε επιτυχώς (προσομοίωση).</p>
-        <div id="confirmation-details" class="summary-box"></div>
+        <div id="confirmation-details" class="summary-box" style="word-break: break-all; overflow-wrap: anywhere;"></div>
         <button class="btn-primary" onclick="resetSupportForm()">Νέο Αίτημα</button>
         <button class="btn-secondary" onclick="showScreen('screen-home')">Επιστροφή στην Αρχική</button>
       </div>
@@ -219,6 +236,6 @@
   <!-- Βιβλιοθήκη JS του Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Το δικό μας αρχείο JavaScript -->
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
