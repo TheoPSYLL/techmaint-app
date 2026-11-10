@@ -8,30 +8,280 @@
   <!-- Βιβλιοθήκη CSS του Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
-  <!-- Το δικό μας αρχείο στυλ (με ?v=2 για να σπάσει η cache!) -->
-  <link rel="stylesheet" href="style.css?v=2">
-
-  <!-- ΑΚΑΡΙΑΙΟ FIX: Κλειδώνει το Textarea και την Αναδίπλωση Κειμένου -->
+  <!-- ΟΛΟΚΛΗΡΟ ΤΟ ΣΤΥΛ ΕΝΣΩΜΑΤΩΜΕΝΟ ΕΔΩ ΓΙΑ ΝΑ ΜΗΝ ΧΑΛΑΕΙ ΠΟΤΕ -->
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #d1d5db;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+
+    .app-container {
+      max-width: 420px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background-color: #f3f4f6;
+      padding-bottom: 75px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      overflow-x: hidden;
+    }
+
+    .app-header {
+      background-color: #1e3a8a;
+      color: #ffffff;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .app-header h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .app-header p {
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .screen {
+      display: none;
+      padding: 16px;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #1e3a8a;
+      margin-bottom: 6px;
+    }
+
+    h3 {
+      font-size: 17px;
+      margin: 14px 0 8px 0;
+      color: #1f2937;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 14px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h4 {
+      color: #1e3a8a;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 12px;
+    }
+
+    .nav-card {
+      cursor: pointer;
+    }
+
+    .link-text {
+      font-size: 14px;
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-accent {
+      width: 100%;
+      min-height: 48px;
+      background-color: #d97706;
+      color: #ffffff;
+      padding: 12px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      min-height: 46px;
+      background-color: #1e3a8a;
+      color: #ffffff;
+      padding: 10px;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      min-height: 46px;
+      background-color: #6b7280;
+      color: #ffffff;
+      padding: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-back {
+      background-color: #e5e7eb;
+      color: #1f2937;
+      padding: 8px 14px;
+      margin-bottom: 12px;
+      min-height: 40px;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      max-width: 100%;
+      min-height: 46px;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #9ca3af;
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-sizing: border-box;
+    }
+
+    /* Κλειδώνει το κουτί της περιγραφής ώστε να μην κουνιέται καθόλου */
     textarea, #description {
       resize: none !important;
-      max-width: 100% !important;
       width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    .summary-box, #confirmation-details, #confirmation-details p {
-      word-wrap: break-word !important;
-      overflow-wrap: anywhere !important;
-      word-break: break-all !important;
-      white-space: normal !important;
       max-width: 100% !important;
+    }
+
+    .error-message {
+      color: #dc2626;
+      background-color: #fee2e2;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .confirmation-card {
+      border: 2px solid #16a34a;
+      background-color: #f0fdf4;
+    }
+
+    .confirmation-card h3 {
+      color: #15803d;
+    }
+
+    /* Κλειδώνει τα μεγάλα κείμενα στο πράσινο κουτί επιβεβαίωσης */
+    .summary-box, #confirmation-details {
+      background-color: #ffffff;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      border: 1px solid #bbf7d0;
+      width: 100%;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .summary-box p, #confirmation-details p {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
+      margin-bottom: 8px;
+    }
+
+    #map {
+      width: 100%;
+      height: 300px;
+      border-radius: 8px;
+      border: 1px solid #9ca3af;
+      margin-bottom: 14px;
+    }
+
+    .station-list {
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    .station-list li {
+      margin-bottom: 6px;
+    }
+
+    .popup-btn {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background-color: #d97706;
+      color: #ffffff;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 420px;
+      background-color: #ffffff;
+      border-top: 1px solid #d1d5db;
+      display: flex;
+      justify-content: space-around;
+      z-index: 1000;
+    }
+
+    .nav-btn {
+      flex: 1;
+      min-height: 54px;
+      background: none;
+      color: #4b5563;
+      border-radius: 0;
+      font-size: 14px;
+    }
+
+    .nav-btn.active-nav {
+      color: #1e3a8a;
+      border-top: 3px solid #1e3a8a;
+      background-color: #eff6ff;
     }
   </style>
 </head>
 <body>
 
   <!-- Κεντρικό Πλαίσιο Mobile Εφαρμογής -->
-  <div class="app-container" style="overflow-x: hidden;">
+  <div class="app-container">
 
     <!-- Κεφαλίδα (Header) -->
     <header class="app-header">
@@ -122,7 +372,6 @@
 
       <form id="support-form" onsubmit="submitForm(event)" novalidate>
         
-        <!-- ΔΥΝΑΜΙΚΟ ΠΕΔΙΟ: Κατηγορία Υπηρεσίας -->
         <div class="form-group">
           <label for="service-category">Κατηγορία Υπηρεσίας *</label>
           <div style="display: flex; gap: 8px;">
@@ -132,12 +381,10 @@
               <option value="Επισκευές Εξοπλισμού">Επισκευές Εξοπλισμού</option>
               <option value="Τεχνική Διάγνωση">Τεχνική Διάγνωση</option>
             </select>
-            <!-- Κουμπί Καθαρισμού -->
             <button type="button" class="btn-back" style="margin:0; min-height:46px; border: 1px solid #9ca3af;" onclick="document.getElementById('service-category').value=''">Χ</button>
           </div>
         </div>
 
-        <!-- ΔΥΝΑΜΙΚΟ ΠΕΔΙΟ: Εγκατάσταση / Τοποθεσία -->
         <div class="form-group">
           <label for="location-select">Εγκατάσταση / Σημείο Εξυπηρέτησης *</label>
           <div style="display: flex; gap: 8px;">
@@ -147,7 +394,6 @@
               <option value="Σταθμός Ασπροπύργου">Βιομηχανικός Σταθμός Ασπροπύργου</option>
               <option value="Τεχνική Βάση Πειραιά">Τεχνική Βάση Πειραιά</option>
             </select>
-            <!-- Κουμπί Καθαρισμού -->
             <button type="button" class="btn-back" style="margin:0; min-height:46px; border: 1px solid #9ca3af;" onclick="document.getElementById('location-select').value=''">Χ</button>
           </div>
         </div>
@@ -166,7 +412,7 @@
 
         <div class="form-group">
           <label for="description">Περιγραφή Προβλήματος / Αιτήματος *</label>
-          <textarea id="description" rows="4" style="resize: none; max-width: 100%; width: 100%;" placeholder="Περιγράψτε τη βλάβη ή την επιθυμητή εργασία συντήρησης..." required></textarea>
+          <textarea id="description" rows="4" placeholder="Περιγράψτε τη βλάβη ή την επιθυμητή εργασία συντήρησης..." required></textarea>
         </div>
 
         <div class="form-group">
@@ -197,7 +443,7 @@
       <div id="confirmation-box" class="card confirmation-card" style="display: none;">
         <h3>✔ Επιτυχής Υποβολή Αιτήματος!</h3>
         <p>Το αίτημά σας καταχωρήθηκε επιτυχώς (προσομοίωση).</p>
-        <div id="confirmation-details" class="summary-box" style="word-break: break-all; overflow-wrap: anywhere;"></div>
+        <div id="confirmation-details" class="summary-box"></div>
         <button class="btn-primary" onclick="resetSupportForm()">Νέο Αίτημα</button>
         <button class="btn-secondary" onclick="showScreen('screen-home')">Επιστροφή στην Αρχική</button>
       </div>
@@ -236,6 +482,6 @@
   <!-- Βιβλιοθήκη JS του Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Το δικό μας αρχείο JavaScript -->
-  <script src="script.js?v=2"></script>
+  <script src="script.js"></script>
 </body>
 </html>
