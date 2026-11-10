@@ -261,3 +261,18 @@ button {
   border-top: 3px solid #1e3a8a;
   background-color: #eff6ff;
 }
+/* 1. Απαγορεύει στο κουτί της περιγραφής να ξεφεύγει δεξιά-αριστερά */
+textarea {
+  resize: vertical; /* Επιτρέπει αυξομείωση ΜΟΝΟ προς τα κάτω (ή βάλε resize: none; για να μην κουνιέται καθόλου) */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 2. Αναγκάζει τα μεγάλα κείμενα στο πράσινο κουτί επιβεβαίωσης να αλλάζουν γραμμή */
+.summary-box, 
+.summary-box p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
