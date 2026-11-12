@@ -1,35 +1,37 @@
-/* Βασικές ρυθμίσεις (Reset & Τυπογραφία) */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+/* TechMaint: ελαφρύ visual polish της αρχικής έκδοσης */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1e3a8a;
+  --orange: #d97706;
+  --app-bg: #f3f4f6;
+  --border: #dfe3e9;
+  --text: #1f2937;
+  --muted: #4b5563;
 }
 
 body {
   font-family: Arial, sans-serif;
   background-color: #d1d5db;
-  color: #1f2937;
+  color: var(--text);
   line-height: 1.5;
 }
 
-/* Κεντρικό πλαίσιο mobile-first (μέγιστο πλάτος 420px) */
 .app-container {
   max-width: 420px;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: #f3f4f6;
-  padding-bottom: 75px; /* Χώρος για το κάτω μενού */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  /* ΝΕΟ: τα μεγάλα κείμενα σπάνε σε νέα γραμμή αντί να βγαίνουν εκτός πλαισίου */
+  background-color: var(--app-bg);
+  padding-bottom: 76px;
+  box-shadow: 0 0 15px rgba(0,0,0,.15);
   overflow-wrap: anywhere;
-  word-break: break-word;
   overflow-x: hidden;
 }
 
-/* Κεφαλίδα (Header) */
 .app-header {
-  background-color: #1e3a8a;
-  color: #ffffff;
+  background-color: var(--blue);
+  color: white;
   padding: 16px;
   text-align: center;
 }
@@ -44,45 +46,41 @@ body {
   color: #dbeafe;
 }
 
-/* Οθόνες (Εμφανίζεται μόνο όποια έχει την κλάση .active) */
 .screen {
   display: none;
   padding: 16px;
 }
 
-.screen.active {
-  display: block;
-}
+.screen.active { display: block; }
 
 h2 {
   font-size: 20px;
-  color: #1e3a8a;
+  color: var(--blue);
   margin-bottom: 6px;
 }
 
 h3 {
   font-size: 17px;
-  margin: 14px 0 8px 0;
-  color: #1f2937;
+  margin: 14px 0 8px;
+  color: var(--text);
 }
 
 .subtitle {
   font-size: 14px;
-  color: #4b5563;
+  color: var(--muted);
   margin-bottom: 14px;
 }
 
-/* Κάρτες περιεχομένου */
 .card {
-  background-color: #ffffff;
+  background: white;
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 14px;
-  border: 1px solid #e5e7eb;
 }
 
 .card h4 {
-  color: #1e3a8a;
+  color: var(--blue);
   margin-bottom: 6px;
 }
 
@@ -92,61 +90,191 @@ h3 {
   margin-bottom: 12px;
 }
 
-.nav-card {
-  cursor: pointer;
-}
-
-.link-text {
-  font-size: 14px;
-  font-weight: bold;
-  color: #1e3a8a;
-}
-
-/* Κουμπιά (Ελάχιστο ύψος 48px για εύκολη αφή σε κινητό) */
+/* Κουμπιά */
 button {
   font-family: inherit;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
 .btn-accent {
   width: 100%;
   min-height: 48px;
-  background-color: #d97706;
-  color: #ffffff;
+  background: var(--orange);
+  color: white;
   padding: 12px;
 }
 
 .btn-primary {
   width: 100%;
   min-height: 46px;
-  background-color: #1e3a8a;
-  color: #ffffff;
+  background: var(--blue);
+  color: white;
   padding: 10px;
 }
 
 .btn-secondary {
   width: 100%;
   min-height: 46px;
-  background-color: #6b7280;
-  color: #ffffff;
+  background: #6b7280;
+  color: white;
   padding: 10px;
   margin-top: 8px;
 }
 
 .btn-back {
-  background-color: #e5e7eb;
-  color: #1f2937;
+  background: #e5e7eb;
+  color: var(--text);
   padding: 8px 14px;
   margin-bottom: 12px;
   min-height: 40px;
   font-size: 14px;
 }
 
-/* Φόρμα Υποστήριξης */
+@media (hover: hover) {
+  .btn-accent:hover,
+  .popup-btn:hover {
+    background: #b86504;
+  }
+
+  .btn-primary:hover {
+    background: #172f74;
+  }
+
+  .quick-action:hover,
+  .nav-card:hover,
+  .station-btn:hover {
+    border-color: #93a8d4;
+    background: #f8faff;
+  }
+}
+
+/* Outline εικονίδια */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ui-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Αρχική: εικονίδια και γρήγορη πρόσβαση */
+.section-heading {
+  margin: 16px 0 9px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.quick-action {
+  min-height: 78px;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--blue);
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.quick-action .ui-icon {
+  width: 23px;
+  height: 23px;
+}
+
+.nav-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: white;
+  font-weight: 400;
+}
+
+.feature-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--blue);
+  margin-bottom: 7px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.feature-title .ui-icon {
+  margin-top: 1px;
+}
+
+.feature-title strong {
+  font-weight: 500;
+}
+
+.feature-description {
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.link-text {
+  display: block;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Υπηρεσίες */
+.service-card h3 {
+  margin: 13px 0 8px;
+}
+
+.service-card p {
+  margin-bottom: 12px;
+}
+
+/* Φόρμα */
+.form-section-title {
+  color: var(--blue);
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+  margin: 6px 0 14px;
+}
+
+.contact-section-title {
+  margin-top: 20px;
+}
+
 .form-group {
   margin-bottom: 14px;
 }
@@ -165,19 +293,17 @@ button {
   max-width: 100%;
   min-height: 46px;
   padding: 10px;
-  font-family: inherit;
-  font-size: 15px;
+  font: normal 15px Arial, sans-serif;
+  color: var(--text);
+  background: white;
   border: 1px solid #9ca3af;
   border-radius: 8px;
-  background-color: #ffffff;
 }
 
-/* ΝΕΟ: αφαιρείται το εικονίδιο αλλαγής μεγέθους στο πεδίο περιγραφής */
 .form-group textarea {
   resize: none;
 }
 
-/* ΝΕΟ: γραμμή με dropdown + κουμπί καθαρισμού (Χ) */
 .field-row {
   display: flex;
   gap: 8px;
@@ -186,31 +312,28 @@ button {
 .form-group .field-row select {
   flex: 1;
   width: auto;
-  min-width: 0; /* επιτρέπει στο dropdown να συρρικνώνεται */
+  min-width: 0;
 }
 
 .btn-clear {
-  flex-shrink: 0;
+  flex: 0 0 44px;
   min-height: 46px;
-  padding: 0 16px;
-  background-color: #e5e7eb;
-  color: #1f2937;
+  padding: 0;
+  background: #e5e7eb;
+  color: var(--text);
   border: 1px solid #9ca3af;
+  font-size: 20px;
 }
 
-.info-banner {
-  background-color: #dbeafe;
-  color: #1e3a8a;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 14px;
-  font-size: 14px;
-  font-weight: bold;
+.field-help {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 5px;
 }
 
 .error-message {
-  color: #dc2626;
-  background-color: #fee2e2;
+  color: #b91c1c;
+  background: #fee2e2;
   padding: 10px;
   border-radius: 6px;
   font-size: 14px;
@@ -218,56 +341,124 @@ button {
   margin-bottom: 12px;
 }
 
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.field-error {
+  font-size: 12px;
+  color: #b91c1c;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
 .confirmation-card {
   border: 2px solid #16a34a;
-  background-color: #f0fdf4;
+  background: #f0fdf4;
 }
 
 .confirmation-card h3 {
   color: #15803d;
+  margin-top: 0;
 }
 
 .summary-box {
-  background-color: #ffffff;
+  background: white;
   padding: 12px;
+  border: 1px solid #bbf7d0;
   border-radius: 6px;
   margin-bottom: 14px;
   font-size: 14px;
-  border: 1px solid #bbf7d0;
-  overflow-wrap: anywhere; /* ΝΕΟ: σπάσιμο μεγάλων λέξεων */
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
-/* Διαδραστικός Χάρτης Leaflet */
+.summary-box p {
+  margin-bottom: 7px;
+}
+
+/* Διαδραστικός χάρτης και λίστα σημείων */
 #map {
   width: 100%;
   height: 300px;
   border-radius: 8px;
   border: 1px solid #9ca3af;
   margin-bottom: 14px;
+  z-index: 0;
 }
 
-.station-list {
-  padding-left: 18px;
-  font-size: 14px;
-}
-
-.station-list li {
-  margin-bottom: 6px;
-}
-
-/* Κουμπί μέσα στο Popup του χάρτη */
 .popup-btn {
   margin-top: 8px;
-  padding: 8px 12px;
-  background-color: #d97706;
-  color: #ffffff;
+  padding: 9px 12px;
+  background: var(--orange);
+  color: white;
   border-radius: 6px;
   font-size: 13px;
   width: 100%;
 }
 
-/* Κάτω Μενού Πλοήγησης (Bottom Navigation) */
+.station-section h4 {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.card .station-hint {
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #6b7280;
+}
+
+.station-list {
+  list-style: none;
+  padding: 0;
+}
+
+.station-list li {
+  margin-bottom: 8px;
+}
+
+.station-btn {
+  width: 100%;
+  min-height: 72px;
+  text-align: left;
+  padding: 10px 12px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  font-weight: normal;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.station-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.35;
+}
+
+.station-title .ui-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--blue);
+  margin-top: 1px;
+}
+
+.station-specialty {
+  display: block;
+  margin: 4px 0 3px 24px;
+}
+
+.station-link {
+  display: block;
+  margin-left: 24px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Κάτω μενού */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -275,15 +466,16 @@ button {
   transform: translateX(-50%);
   width: 100%;
   max-width: 420px;
-  background-color: #ffffff;
+  background: white;
   border-top: 1px solid #d1d5db;
   display: flex;
-  justify-content: space-around;
+  z-index: 1000;
 }
 
 .nav-btn {
   flex: 1;
   min-height: 54px;
+  padding: 8px 2px;
   background: none;
   color: #4b5563;
   border-radius: 0;
@@ -291,40 +483,21 @@ button {
 }
 
 .nav-btn.active-nav {
-  color: #1e3a8a;
-  border-top: 3px solid #1e3a8a;
-  background-color: #eff6ff;
+  color: var(--blue);
+  border-top: 3px solid var(--blue);
+  background: #eff6ff;
 }
 
-/* ΝΕΟ: σφάλματα ανά πεδίο φόρμας */
-.form-group.has-error input,
-.form-group.has-error select,
-.form-group.has-error textarea {
-  border-color: #dc2626;
-  background-color: #fef2f2;
-}
+@media (max-width: 360px) {
+  .screen {
+    padding: 12px;
+  }
 
-.field-error {
-  color: #dc2626;
-  font-size: 13px;
-  font-weight: bold;
-  margin-top: 4px;
-}
+  .nav-btn {
+    font-size: 13px;
+  }
 
-/* ΝΕΟ: η λίστα σημείων κάτω από τον χάρτη ως κουμπιά */
-.station-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.station-btn {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 12px;
-  text-align: left;
-  font-weight: normal;
-  font-size: 14px;
-  background-color: #f3f4f6;
-  color: #1f2937;
-  border: 1px solid #d1d5db;
+  .quick-action {
+    font-size: 11px;
+  }
 }
