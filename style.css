@@ -295,3 +295,36 @@ button {
   border-top: 3px solid #1e3a8a;
   background-color: #eff6ff;
 }
+
+/* ΝΕΟ: σφάλματα ανά πεδίο φόρμας */
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.field-error {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+/* ΝΕΟ: η λίστα σημείων κάτω από τον χάρτη ως κουμπιά */
+.station-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.station-btn {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: normal;
+  font-size: 14px;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+}
