@@ -20,6 +20,10 @@ body {
   background-color: #f3f4f6;
   padding-bottom: 75px; /* Χώρος για το κάτω μενού */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  /* ΝΕΟ: τα μεγάλα κείμενα σπάνε σε νέα γραμμή αντί να βγαίνουν εκτός πλαισίου */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  overflow-x: hidden;
 }
 
 /* Κεφαλίδα (Header) */
@@ -158,12 +162,40 @@ button {
 .form-group select,
 .form-group textarea {
   width: 100%;
+  max-width: 100%;
   min-height: 46px;
   padding: 10px;
+  font-family: inherit;
   font-size: 15px;
   border: 1px solid #9ca3af;
   border-radius: 8px;
   background-color: #ffffff;
+}
+
+/* ΝΕΟ: αφαιρείται το εικονίδιο αλλαγής μεγέθους στο πεδίο περιγραφής */
+.form-group textarea {
+  resize: none;
+}
+
+/* ΝΕΟ: γραμμή με dropdown + κουμπί καθαρισμού (Χ) */
+.field-row {
+  display: flex;
+  gap: 8px;
+}
+
+.form-group .field-row select {
+  flex: 1;
+  width: auto;
+  min-width: 0; /* επιτρέπει στο dropdown να συρρικνώνεται */
+}
+
+.btn-clear {
+  flex-shrink: 0;
+  min-height: 46px;
+  padding: 0 16px;
+  background-color: #e5e7eb;
+  color: #1f2937;
+  border: 1px solid #9ca3af;
 }
 
 .info-banner {
@@ -202,6 +234,8 @@ button {
   margin-bottom: 14px;
   font-size: 14px;
   border: 1px solid #bbf7d0;
+  overflow-wrap: anywhere; /* ΝΕΟ: σπάσιμο μεγάλων λέξεων */
+  word-break: break-word;
 }
 
 /* Διαδραστικός Χάρτης Leaflet */
