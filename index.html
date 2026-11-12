@@ -108,7 +108,7 @@
         <!-- ΔΥΝΑΜΙΚΟ ΠΕΔΙΟ: Κατηγορία Υπηρεσίας -->
         <div class="form-group">
           <label for="service-category">Κατηγορία Υπηρεσίας *</label>
-          <div style="display: flex; gap: 8px;">
+          <div class="field-row">
             <select id="service-category" required>
               <option value="">-- Επιλέξτε Υπηρεσία --</option>
               <option value="Προληπτική Συντήρηση">Προληπτική Συντήρηση</option>
@@ -116,14 +116,14 @@
               <option value="Τεχνική Διάγνωση">Τεχνική Διάγνωση</option>
             </select>
             <!-- Κουμπί Καθαρισμού -->
-            <button type="button" class="btn-back" style="margin:0; min-height:46px; border: 1px solid #9ca3af;" onclick="document.getElementById('service-category').value=''">Χ</button>
+            <button type="button" class="btn-clear" aria-label="Καθαρισμός" onclick="document.getElementById('service-category').value=''">Χ</button>
           </div>
         </div>
 
         <!-- ΔΥΝΑΜΙΚΟ ΠΕΔΙΟ: Εγκατάσταση / Τοποθεσία -->
         <div class="form-group">
           <label for="location-select">Εγκατάσταση / Σημείο Εξυπηρέτησης *</label>
-          <div style="display: flex; gap: 8px;">
+          <div class="field-row">
             <select id="location-select" required>
               <option value="">-- Επιλέξτε Εγκατάσταση --</option>
               <option value="Κέντρο Αιγάλεω">Κέντρο Δυτικής Αττικής (Αιγάλεω)</option>
@@ -131,7 +131,7 @@
               <option value="Τεχνική Βάση Πειραιά">Τεχνική Βάση Πειραιά</option>
             </select>
             <!-- Κουμπί Καθαρισμού -->
-            <button type="button" class="btn-back" style="margin:0; min-height:46px; border: 1px solid #9ca3af;" onclick="document.getElementById('location-select').value=''">Χ</button>
+            <button type="button" class="btn-clear" aria-label="Καθαρισμός" onclick="document.getElementById('location-select').value=''">Χ</button>
           </div>
         </div>
 
@@ -149,7 +149,7 @@
 
         <div class="form-group">
           <label for="description">Περιγραφή Προβλήματος / Αιτήματος *</label>
-          <textarea id="description" rows="4" placeholder="Περιγράψτε τη βλάβη ή την επιθυμητή εργασία συντήρησης..." required></textarea>
+          <textarea id="description" rows="4" maxlength="500" style="resize: none;" placeholder="Περιγράψτε τη βλάβη ή την επιθυμητή εργασία συντήρησης..." required></textarea>
         </div>
 
         <div class="form-group">
@@ -164,12 +164,12 @@
 
         <div class="form-group">
           <label for="contact-name">Ονοματεπώνυμο *</label>
-          <input type="text" id="contact-name" placeholder="π.χ. Γιώργος Παπαδόπουλος" required>
+          <input type="text" id="contact-name" maxlength="50" placeholder="π.χ. Γιώργος Παπαδόπουλος" required>
         </div>
 
         <div class="form-group">
           <label for="contact-phone">Τηλέφωνο Επικοινωνίας *</label>
-          <input type="tel" id="contact-phone" placeholder="π.χ. 6912345678" maxlength="10" pattern="[0-9]{10}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+          <input type="tel" id="contact-phone" inputmode="numeric" placeholder="π.χ. 6912345678" maxlength="10" pattern="[0-9]{10}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
         </div>
 
         <p id="form-error" class="error-message" style="display: none;"></p>
@@ -182,7 +182,7 @@
         <p>Το αίτημά σας καταχωρήθηκε επιτυχώς (προσομοίωση).</p>
         <div id="confirmation-details" class="summary-box"></div>
         <button class="btn-primary" onclick="resetSupportForm()">Νέο Αίτημα</button>
-        <button class="btn-secondary" onclick="showScreen('screen-home')">Επιστροφή στην Αρχική</button>
+        <button class="btn-secondary" onclick="navTo('screen-home')">Επιστροφή στην Αρχική</button>
       </div>
     </section>
 
@@ -208,10 +208,10 @@
 
     <!-- Κάτω Μενού Πλοήγησης -->
     <nav class="bottom-nav">
-      <button id="nav-home" class="nav-btn active-nav" onclick="showScreen('screen-home')">Αρχική</button>
-      <button id="nav-services" class="nav-btn" onclick="showScreen('screen-services')">Υπηρεσίες</button>
-      <button id="nav-form" class="nav-btn" onclick="showScreen('screen-form')">Αίτημα</button>
-      <button id="nav-map" class="nav-btn" onclick="showScreen('screen-map')">Χάρτης</button>
+      <button id="nav-home" class="nav-btn active-nav" onclick="navTo('screen-home')">Αρχική</button>
+      <button id="nav-services" class="nav-btn" onclick="navTo('screen-services')">Υπηρεσίες</button>
+      <button id="nav-form" class="nav-btn" onclick="navTo('screen-form')">Αίτημα</button>
+      <button id="nav-map" class="nav-btn" onclick="navTo('screen-map')">Χάρτης</button>
     </nav>
 
   </div>
